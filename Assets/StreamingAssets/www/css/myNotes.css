@@ -1,0 +1,68 @@
+body {
+  background-color: #f0f0f0;
+  font-size: .22rem;
+  font-family: NotoSansCJKsc-Regular;
+}
+body ::-webkit-scrollbar {
+  display: none;
+  /*隐藏滚轮*/
+}
+#app {
+  margin-top: .1rem;
+}
+#app .comment {
+  padding: .2rem;
+}
+#app .comment li {
+  background-color: #fff;
+  padding: .2rem;
+  border-bottom: .08rem solid #f0f0f0;
+  border-radius: .1rem;
+}
+#app .comment li .userComment {
+  display: flex;
+  justify-content: space-between;
+}
+#app .comment li .userComment .userName {
+  flex: 1;
+  display: flex;
+}
+#app .comment li .userComment .userName img {
+  width: .4rem;
+  height: .4rem;
+}
+#app .comment li .userComment .userName h2 {
+  font-size: .24rem;
+  color: #64A0DC;
+  margin-right: .2rem;
+  margin-left: .1rem;
+}
+#app .comment li .userComment .userName span {
+  color: #b4b4b4;
+  font-size: .2rem;
+}
+#app .comment li .userComment .userAgreeNums.active {
+  color: #ff6e6b;
+}
+#app .comment li .userComment .userAgreeNums {
+  color: #b4b4b4;
+  font-size: .2rem;
+  display: flex;
+  align-items: center;
+}
+#app .comment li .userComment .userAgreeNums img {
+  width: 0.29rem;
+  height: 0.28rem;
+  margin-right: .1rem;
+}
+#app .comment li .userComment .userAgreeNums .delImg {
+  width: .34rem;
+  height: .34rem;
+  margin-right: 0;
+  margin-left: .18rem;
+}
+#app .comment li p {
+  margin-top: .1rem;
+  font-size: .3rem;
+  color: #787878;
+}

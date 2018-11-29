@@ -1,0 +1,109 @@
+body {
+  background: #f0f0f0;
+  font-family: NotoSansCJKsc-Regular;
+}
+section {
+  font-size: .24rem;
+}
+section .roomOwn {
+  background: #fff;
+  overflow: hidden;
+  border-radius: .1rem;
+  padding: .4rem .2rem .2rem;
+  margin: .1rem .2rem .2rem;
+  display: flex;
+  justify-content: flex-start;
+}
+section .roomOwn .avatar img {
+  width: .8rem;
+  height: .8rem;
+}
+section .roomOwn .userSign {
+  margin-left: .2rem;
+  flex: 1;
+  padding-bottom: .2rem;
+  border-bottom: .01rem solid #dcdcdc;
+}
+section .roomOwn .userSign .userComment {
+  display: flex;
+  justify-content: space-between;
+}
+section .roomOwn .userSign .userComment .userName h2 {
+  font-size: .3rem;
+  color: #191919;
+  margin-bottom: .08rem;
+}
+section .roomOwn .userSign .userComment .userName span {
+  color: #b4b4b4;
+  font-size: .24rem;
+}
+section .roomOwn .userSign .userComment .userAgreeNums.active {
+  color: #ff6e6b;
+}
+section .roomOwn .userSign .userComment .userAgreeNums {
+  color: #b4b4b4;
+  font-size: .24rem;
+}
+section .roomOwn .userSign .userComment .userAgreeNums img {
+  width: 0.29rem;
+  height: 0.28rem;
+}
+section .roomOwn .userSign p {
+  font-size: .28rem;
+  color: #191919;
+  padding: .2rem 0 0 0;
+}
+section .reply {
+  background: #fff;
+  overflow: hidden;
+  border-radius: .1rem;
+  margin: 0 .2rem;
+  padding-top: .2rem;
+}
+section .reply .comment li {
+  padding: .2rem;
+  display: flex;
+  justify-content: flex-start;
+}
+section .reply .comment li .avatar img {
+  width: .8rem;
+  height: .8rem;
+}
+section .reply .comment li .userSign {
+  margin-left: .2rem;
+  flex: 1;
+  padding-bottom: .2rem;
+  border-bottom: .01rem solid #dcdcdc;
+}
+section .reply .comment li .userSign .userComment {
+  display: flex;
+  justify-content: space-between;
+}
+section .reply .comment li .userSign .userComment .userName h2 {
+  font-size: .3rem;
+  color: #191919;
+  margin-bottom: .08rem;
+}
+section .reply .comment li .userSign .userComment .userName span {
+  color: #b4b4b4;
+  font-size: .24rem;
+}
+section .reply .comment li .userSign .userComment .userAgreeNums.active {
+  color: #ff6e6b;
+}
+section .reply .comment li .userSign .userComment .userAgreeNums {
+  color: #b4b4b4;
+  font-size: .24rem;
+}
+section .reply .comment li .userSign .userComment .userAgreeNums img {
+  width: 0.29rem;
+  height: 0.28rem;
+}
+section .reply .comment li .userSign p {
+  font-size: .28rem;
+  color: #191919;
+  padding: .2rem 0 0 0;
+}
+section .reply .comment li .userSign p a {
+  color: #64a0dc;
+}

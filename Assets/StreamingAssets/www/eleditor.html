@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>eee</title>
+    <!-- Include the Quill library -->
+    <script src="./lib/js/quill.js"></script>
+    <script src="./lib/js/quill-vue.js"></script>
+    <script src="./lib/js/vue-resource.js"></script>
+    <!-- Quill JS Vue -->
+    <script src="./lib/js/vue-quill-editor.js"></script>
+    <!-- <script src="./js/vue-quill-editor-config.js"></script> -->
+    <!-- Include stylesheet -->
+    <link href="./css/quill.core.css" rel="stylesheet">
+    <link href="./css/quill.snow.css" rel="stylesheet">
+    <link href="./css/quill.bubble.css" rel="stylesheet">
+    <style>
+
+        body {
+            position: relative;
+        }
+
+        .loading {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            top: 50%;
+            margin-top: -40px;
+            margin-left: -40px;
+            background: rgba(0, 0, 0, .5);
+            border-radius: 4px;
+            z-index: 1000;
+        }
+
+            .loading img {
+                position: absolute;
+                height: 40px;
+                width: 40px;
+                top: 50%;
+                left: 50%;
+                margin-top: -20px;
+                margin-left: -20px;
+                -webkit-animation: rotateImg 4s linear infinite;
+            }
+
+            .loading span {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                text-align: center;
+                font-size: 12px;
+                color: #fff;
+            }
+
+        @keyframes rotateImg {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes rotateImg {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .quill-editor,
+        .content {
+            background-color: white;
+        }
+
+        .ql-editor {
+            font-size: 18px;
+        }
+
+        .titleTxt {
+            display: flex;
+            height: 40px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+            .titleTxt input {
+                flex: 1;
+                text-indent: 1em;
+                font-size: 18px;
+                outline: none;
+                border: 0 none;
+            }
+        /* .blank{
+            background-color: skyblue;
+        } */
+    </style>
+    <!--<script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>-->
+</head>
+
+<body>
+    
+    <div id="vueapp">
+        <div class="titleTxt">
+            <input type="text" placeholder="输入标题" v-model="titleTxt">
+        </div>
+        <!-- <p>{{message}}</p> -->
+        <quill-editor v-model="content" ref="quillEditorA" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+            @ready="onEditorReady($event)">
+        </quill-editor>
+        <!-- <button @click="send">提交</button> -->
+        <!-- <div class="blank"></div> -->
+        <!-- <div class="content ql-editor" v-html="content"></div> -->
+        <!-- <br> -->
+        <!-- <local-quill-editor v-model="content2" ref="quillEditorB" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+            @ready="onEditorReady($event)">
+        </local-quill-editor> -->
+        <!-- <div class="content ql-editor" v-html="content2"></div> -->
+        <div class="loading" v-show="isShowLoading">
+            <img src="./images/loading.png" alt="">
+            <span>加载中...</span>
+        </div>
+    </div>
+    <script>
+        var uploadConfig = {
+            action: 'http://apiv2.yangqungongshe.com/files/image.json',  // 必填参数 图片上传地址
+            methods: 'POST',  // 必填参数 图片上传方式
+            token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
+            name: 'img',  // 必填参数 文件的参数名
+            size: 10 * 1024,  // 可选参数   图片大小，单位为Kb, 1M = 1024Kb
+            accept: 'image/*'
+            // accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon'  // 可选 可上传的图片格式
+        }
+
+        var myhandlers = {
+            image: function image() {
+                var self = this;
+
+                var fileInput = this.container.querySelector('input.ql-image[type=file]');
+                if (fileInput === null) {
+                    fileInput = document.createElement('input');
+                    fileInput.setAttribute('type', 'file');
+                    // 设置图片参数名
+                    if (uploadConfig.name) {
+                        fileInput.setAttribute('name', uploadConfig.name);
+                    }
+                    // 可设置上传图片的格式
+                    fileInput.setAttribute('accept', uploadConfig.accept);
+                    fileInput.classList.add('ql-image');
+                    // 监听选择文件
+                    fileInput.addEventListener('change', function () {
+                        // 如果图片限制大小
+                        if (uploadConfig.size && fileInput.files[0].size >= uploadConfig.size * 1024) {
+                            fileInput.value = ''
+                            return
+                        }
+                        // 创建formData
+                        var formData = new FormData()
+                        formData.append(uploadConfig.name, fileInput.files[0])
+                        // 如果需要token且存在token
+                        if (uploadConfig.token) {
+                            formData.append('token', uploadConfig.token)
+                        }
+                        // 图片上传
+                        var xhr = new XMLHttpRequest()
+                        xhr.open(uploadConfig.methods, uploadConfig.action, true)
+                        // 上传数据成功，会触发
+                        xhr.onload = function (e) {
+                            if (xhr.status === 200) {
+                                var res = JSON.parse(xhr.responseText)
+                                console.log('res=>', res);
+                                var length = self.quill.getSelection(true).index;
+                                self.quill.insertEmbed(length, 'image', res.url) //徐阳修改
+                                self.quill.setSelection(length + 1)
+                            }
+                            fileInput.value = ''
+                        }
+                        // 开始上传数据
+                        xhr.upload.onloadstart = function (e) {
+                            fileInput.value = ''
+                            // console.log('开始上传')
+                        }
+                        // 当发生网络异常的时候会触发，如果上传数据的过程还未结束
+                        xhr.upload.onerror = function (e) {
+                        }
+                        // 上传数据完成（成功或者失败）时会触发
+                        xhr.upload.onloadend = function (e) {
+                            // console.log('上传结束')
+                        }
+                        xhr.send(formData)
+                    });
+                    this.container.appendChild(fileInput);
+                }
+                fileInput.click();
+            }
+        }
+
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline'],        // toggled buttons
+            // ['link'],
+            // ['blockquote', 'code-block'],
+
+            // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            // [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+            // [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+            // [{ 'direction': 'rtl' }],                         // text direction
+
+            // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            // [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['image']
+            // ['clean']                                         // remove formatting button
+        ];
+        // var quill = new Quill('#vueapp', {
+        //     modules: {
+        //         toolbar: toolbarOptions
+        //     },
+        //     theme: 'snow'
+        // });
+
+        Vue.use(VueQuillEditor)
+        var vm = new Vue({
+            el: '#vueapp',
+            data: {
+                ssid: '',
+                isShowLoading: false, // loading显示
+                titleTxt: '', // 标题
+                // message: 'Hi from Vue.',
+                content: '',
+                // content2: '<h2>I am Example yangxu</h2>',
+                editorOption: {
+                    modules: {
+                        toolbar: {
+                            container: toolbarOptions,  // 工具栏选项
+                            handlers: myhandlers  // 事件重写
+                        }
+                    },
+                    theme: 'snow',
+                    placeholder: '开始编辑正文...',
+                }
+            },
+            components: {
+                LocalQuillEditor: VueQuillEditor.quillEditor
+            },
+            methods: {
+                send() { //提交
+                    this.isShowLoading = true;
+                    // 正文 单引号代替双引号
+                    var contentTxt = this.content.replace(/\"/g, "'"); 
+                    // 摘要
+                    var summary = contentTxt.replace(/<.*?>/ig, ""); 
+                    var summaryLength = summary.length;
+                    console.info(summaryLength)
+                    if (summaryLength < 50) {
+                        summary = summary.substring(0, summaryLength)
+                    } else {
+                        summary = summary.substring(0, 50) + '...'
+                    }
+                    // 提取第一个img src 做为封面
+                    var regex = /<img.*?src='(.*?)'/;
+                    // console.info(regex.exec(contentTxt));
+                    var src = regex.exec(contentTxt) ? regex.exec(contentTxt)[1] : '';
+                    // console.info(contentTxt.replace(/<.*?>/ig,""));
+                    // console.info(src);
+                    // console.info(this.titleTxt);
+                    // console.info(summary);
+                    // console.info(contentTxt);
+                    this.$http.post(
+                        "http://apiv2.yangqungongshe.com/posts",
+                        { 
+                            "SourcePictureUrl": src,
+                            "Title": this.titleTxt,
+                            "Summary": summary,
+                            "ContentType": "图文",
+                            "Content": contentTxt,
+                            "AutoPublish": true
+                        },
+                        {
+                            emulateJSON: true,
+                            headers: {
+                                "X-ss-opt": "perm",
+                                "X-ss-pid": this.ssid
+                            }
+                        }
+                    ).then(function (res) {
+                        console.info('res=>', res);
+                        this.isShowLoading = false;
+						window.location.href = 'uniwebview://preach_publish?succ=1';
+                    }, function (res) {
+						window.location.href = 'uniwebview://preach_publish?succ=0&msg='+res.responseJSON.ResponseStatus.Message;
+                    })
+                },
+                onEditorBlur(quill) {
+                    console.log('editor blur!', quill)
+                },
+                onEditorFocus(quill) {
+                    console.log('editor focus!', quill)
+                },
+                onEditorReady(quill) {
+                    console.log('editor ready!', quill)
+                },
+
+            },
+            computed: {
+                editorA() {
+                    return this.$refs.quillEditorA.quill
+                },
+                // editorB() {
+                //     // return this.$refs.quillEditorB.quill
+                // }
+            },
+            mounted() {
+
+                // console.log('this is quill A instance object', this.editorA, 'B instance', this.editorB)
+            }
+		})
+		
+		function getUnityData(ssid) {
+			vm.ssid = ssid;
+		}
+		
+		function send(){
+			vm.send()
+		}
+    </script>
+    <script src="./lib/js/jquery.min.js"></script>
+    <script>
+        var winH = $(window).height();
+        $('body').css({"min-height": winH - 16});
+        // $('.blank').height(winH/2);
+        $('.ql-container').css({"height": "160px"});
+        window.addEventListener('scroll', function () {
+            console.log($(this).scrollTop()); // 计算你的屏幕高度
+            var scrollH = $(this).scrollTop();
+            if (scrollH >= 50) {
+                $('.ql-toolbar.ql-snow').css({
+                    'position': 'absolute',
+                    // 'top': scrollH - 50,
+                    'left': 0,
+                    'width': '100%',
+                    'background': '#fff',
+                    'z-index': 1000,
+                })
+                $('.ql-toolbar.ql-snow').animate({
+                    "top": scrollH - 50 + "px",
+                }, 10)
+                $('.titleTxt').css({
+                    "margin-top": "50px",
+                    "margin-bottom": "0"
+                })
+            }
+            if (scrollH < 10) {
+                $('.ql-toolbar.ql-snow').css({
+                    'position': 'static',
+                    'top': 0,
+                    'left': 0,
+                    'width': '100%',
+                    'background': '#fff',
+                    'z-index': 0,
+                })
+                $('.titleTxt').css({
+                    "margin-top": "0",
+                    "margin-bottom": "10px"
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

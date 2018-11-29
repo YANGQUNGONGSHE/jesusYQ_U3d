@@ -1,0 +1,300 @@
+{
+  "InfoList": [
+    {
+      "UiId": "1",
+      "ResPath": "UIPrefabs/LoginsView",
+      "AbPath": "Download/UI/View/LoginsView",
+      "NabPath": "Download/UI/View/LoginsView"
+    },
+    {
+      "UiId": "2",
+      "ResPath": "UIPrefabs/SetDyNameView",
+      "AbPath": "Download/UI/View/SetDyNameView",
+      "NabPath": "Download/UI/View/SetDyNameView"
+    },
+    {
+      "UiId": "3",
+      "ResPath": "UIPrefabs/BottomBarView",
+      "AbPath": "Download/UI/View/BottomBarView",
+      "NabPath": "Download/UI/View/BottomBarView"
+    },
+    {
+      "UiId": "4",
+      "ResPath": "UIPrefabs/PreachView",
+      "AbPath": "Download/UI/View/PreachView",
+      "NabPath": "Download/UI/View/PreachView"
+    },
+    {
+      "UiId": "106",
+      "ResPath": "UIPrefabs/ChatSessionView",
+      "AbPath": "Download/UI/View/ChatSessionView",
+      "NabPath": "Download/UI/View/ChatSessionView"
+    },
+    {
+      "UiId": "107",
+      "ResPath": "UIPrefabs/ChatMainView",
+      "AbPath": "Download/UI/View/ChatMainView",
+      "NabPath": "Download/UI/View/ChatMainView"
+    },
+    {
+      "UiId": "5",
+      "ResPath": "UIPrefabs/MeView",
+      "AbPath": "Download/UI/View/MeView",
+      "NabPath": "Download/UI/View/MeView"
+    },
+    {
+      "UiId": "108",
+      "ResPath": "UIPrefabs/ChatFriendView",
+      "AbPath": "Download/UI/View/ChatFriendView",
+      "NabPath": "Download/UI/View/ChatFriendView"
+    },
+    {
+      "UiId": "109",
+      "ResPath": "UIPrefabs/ChatEditorGroupView",
+      "AbPath": "Download/UI/View/ChatEditorGroupView",
+      "NabPath": "Download/UI/View/ChatEditorGroupView"
+    },
+    {
+      "UiId": "110",
+      "ResPath": "UIPrefabs/ChatGroupView",
+      "AbPath": "Download/UI/View/ChatGroupView",
+      "NabPath": "Download/UI/View/ChatGroupView"
+    },
+    {
+      "UiId": "111",
+      "ResPath": "UIPrefabs/ChatSearchView",
+      "AbPath": "Download/UI/View/ChatSearchView",
+      "NabPath": "Download/UI/View/ChatSearchView"
+    },
+    {
+      "UiId": "112",
+      "ResPath": "UIPrefabs/ChatGroupSettingView",
+      "AbPath": "Download/UI/View/ChatGroupSettingView",
+      "NabPath": "Download/UI/View/ChatGroupSettingView"
+    },
+    {
+      "UiId": "113",
+      "ResPath": "UIPrefabs/ChatGroupSelectMemberAddView",
+      "AbPath": "Download/UI/View/ChatGroupSelectMemberAddView",
+      "NabPath": "Download/UI/View/ChatGroupSelectMemberAddView"
+    },
+    {
+      "UiId": "114",
+      "ResPath": "UIPrefabs/ChatGroupAnnouncementView",
+      "AbPath": "Download/UI/View/ChatGroupAnnouncementView",
+      "NabPath": "Download/UI/View/ChatGroupAnnouncementView"
+    },
+    {
+      "UiId": "115",
+      "ResPath": "UIPrefabs/ChatGrouAnnEditorView",
+      "AbPath": "Download/UI/View/ChatGrouAnnEditorView",
+      "NabPath": "Download/UI/View/ChatGrouAnnEditorView"
+    },
+    {
+      "UiId": "116",
+      "ResPath": "UIPrefabs/ChatGroupManageView",
+      "AbPath": "Download/UI/View/ChatGroupManageView",
+      "NabPath": "Download/UI/View/ChatGroupManageView"
+    },
+    {
+      "UiId": "117",
+      "ResPath": "UIPrefabs/ChatGroupSetManagerView",
+      "AbPath": "Download/UI/View/ChatGroupSetManagerView",
+      "NabPath": "Download/UI/View/ChatGroupSetManagerView"
+    },
+    {
+      "UiId": "118",
+      "ResPath": "UIPrefabs/ChatAddtManagerView",
+      "AbPath": "Download/UI/View/ChatAddtManagerView",
+      "NabPath": "Download/UI/View/ChatAddtManagerView"
+    },
+    {
+      "UiId": "119",
+      "ResPath": "UIPrefabs/ChatGroupMemberView",
+      "AbPath": "Download/UI/View/ChatGroupMemberView",
+      "NabPath": "Download/UI/View/ChatGroupMemberView"
+    },
+    {
+      "UiId": "120",
+      "ResPath": "UIPrefabs/ChatGroupTransferMembersView",
+      "AbPath": "Download/UI/View/ChatGroupTransferMembersView",
+      "NabPath": "Download/UI/View/ChatGroupTransferMembersView"
+    },
+    {
+      "UiId": "121",
+      "ResPath": "UIPrefabs/ChatSystemMsView",
+      "AbPath": "Download/UI/View/ChatSystemMsView",
+      "NabPath": "Download/UI/View/ChatSystemMsView"
+    },
+    {
+      "UiId": "201",
+      "ResPath": "UIPrefabs/PreachPostView",
+      "AbPath": "Download/UI/View/PreachPostView",
+      "NabPath": "Download/UI/View/PreachPostView"
+    },
+    {
+      "UiId": "9",
+      "ResPath": "UIPrefabs/PersonalView",
+      "AbPath": "Download/UI/View/PersonalView",
+      "NabPath": "Download/UI/View/PersonalView"
+    },
+    {
+      "UiId": "202",
+      "ResPath": "UIPrefabs/PreachEditorOptionView",
+      "AbPath": "Download/UI/View/PreachEditorOptionView",
+      "NabPath": "Download/UI/View/PreachEditorOptionView"
+    },
+    {
+      "UiId": "203",
+      "ResPath": "UIPrefabs/SetView",
+      "AbPath": "Download/UI/View/SetView",
+      "NabPath": "Download/UI/View/SetView"
+    },
+    {
+      "UiId": "204",
+      "ResPath": "UIPrefabs/EditorUserDataView",
+      "AbPath": "Download/UI/View/EditorUserDataView",
+      "NabPath": "Download/UI/View/EditorUserDataView"
+    },
+    {
+      "UiId": "205",
+      "ResPath": "UIPrefabs/EditorNameOrSignatureView",
+      "AbPath": "Download/UI/View/EditorNameOrSignatureView",
+      "NabPath": "Download/UI/View/EditorNameOrSignatureView"
+    },
+    {
+      "UiId": "206",
+      "ResPath": "UIPrefabs/LocalView",
+      "AbPath": "Download/UI/View/LocalView",
+      "NabPath": "Download/UI/View/LocalView"
+    },
+    {
+      "UiId": "207",
+      "ResPath": "UIPrefabs/FocusAndFansView",
+      "AbPath": "Download/UI/View/FocusAndFansView",
+      "NabPath": "Download/UI/View/FocusAndFansView"
+    },
+    {
+      "UiId": "208",
+      "ResPath": "UIPrefabs/AccountSafeView",
+      "AbPath": "Download/UI/View/AccountSafeView",
+      "NabPath": "Download/UI/View/AccountSafeView"
+    },
+    {
+      "UiId": "209",
+      "ResPath": "UIPrefabs/ChangeBindPhoneView",
+      "AbPath": "Download/UI/View/ChangeBindPhoneView",
+      "NabPath": "Download/UI/View/ChangeBindPhoneView"
+    },
+    {
+      "UiId": "210",
+      "ResPath": "UIPrefabs/MyLikePostsView",
+      "AbPath": "Download/UI/View/MyLikePostsView",
+      "NabPath": "Download/UI/View/MyLikePostsView"
+    },
+    {
+      "UiId": "211",
+      "ResPath": "UIPrefabs/PreachEditorView",
+      "AbPath": "Download/UI/View/PreachEditorView",
+      "NabPath": "Download/UI/View/PreachEditorView"
+    },
+    {
+      "UiId": "212",
+      "ResPath": "UIPrefabs/PreachEditorVideoView",
+      "AbPath": "Download/UI/View/PreachEditorVideoView",
+      "NabPath": "Download/UI/View/PreachEditorVideoView"
+    },
+    {
+      "UiId": "213",
+      "ResPath": "UIPrefabs/PreachSearchView",
+      "AbPath": "Download/UI/View/PreachSearchView",
+      "NabPath": "Download/UI/View/PreachSearchView"
+    },
+    {
+      "UiId": "214",
+      "ResPath": "UIPrefabs/PreachEditorCommnetView",
+      "AbPath": "Download/UI/View/PreachEditorCommnetView",
+      "NabPath": "Download/UI/View/PreachEditorCommnetView"
+    },
+    {
+      "UiId": "215",
+      "ResPath": "UIPrefabs/PreachReplyCommentView",
+      "AbPath": "Download/UI/View/PreachReplyCommentView",
+      "NabPath": "Download/UI/View/PreachReplyCommentView"
+    },
+    {
+      "UiId": "216",
+      "ResPath": "UIPrefabs/ClassicsView",
+      "AbPath": "Download/UI/View/ClassicsView",
+      "NabPath": "Download/UI/View/ClassicsView"
+    },
+    {
+      "UiId": "217",
+      "ResPath": "UIPrefabs/BookDetailView",
+      "AbPath": "Download/UI/View/BookDetailView",
+      "NabPath": "Download/UI/View/BookDetailView"
+    },
+    {
+      "UiId": "218",
+      "ResPath": "UIPrefabs/CollectView",
+      "AbPath": "Download/UI/View/CollectView",
+      "NabPath": "Download/UI/View/CollectView"
+    },
+    {
+      "UiId": "219",
+      "ResPath": "UIPrefabs/EditorBirthdayView",
+      "AbPath": "Download/UI/View/EditorBirthdayView",
+      "NabPath": "Download/UI/View/EditorBirthdayView"
+    },
+    {
+      "UiId": "220",
+      "ResPath": "UIPrefabs/ReportView",
+      "AbPath": "Download/UI/View/ReportView",
+      "NabPath": "Download/UI/View/ReportView"
+    },
+    {
+      "UiId": "221",
+      "ResPath": "UIPrefabs/FeedBackView",
+      "AbPath": "Download/UI/View/FeedBackView",
+      "NabPath": "Download/UI/View/FeedBackView"
+    },
+    {
+      "UiId": "222",
+      "ResPath": "UIPrefabs/SysCustomLikeView",
+      "AbPath": "Download/UI/View/SysCustomLikeView",
+      "NabPath": "Download/UI/View/SysCustomLikeView"
+    },
+    {
+      "UiId": "223",
+      "ResPath": "UIPrefabs/SysCustomCommentView",
+      "AbPath": "Download/UI/View/SysCustomCommentView",
+      "NabPath": "Download/UI/View/SysCustomCommentView"
+    },
+    {
+      "UiId": "224",
+      "ResPath": "UIPrefabs/TermsView",
+      "AbPath": "Download/UI/View/TermsView",
+      "NabPath": "Download/UI/View/TermsView"
+    },
+    {
+      "UiId": "225",
+      "ResPath": "UIPrefabs/BlackView",
+      "AbPath": "Download/UI/View/BlackView",
+      "NabPath": "Download/UI/View/BlackView"
+    },
+    {
+      "UiId": "8",
+      "ResPath": "UIPrefabs/BibleView",
+      "AbPath": "Download/UI/View/BibleView",
+      "NabPath": "Download/UI/View/BibleView"
+    },
+
+    {
+      "UiId": "10",
+      "ResPath": "UIPrefabs/BibleShowView",
+      "AbPath": "Download/UI/View/BibleShowView",
+      "NabPath": "Download/UI/View/BibleShowView"
+    }
+
+  ]
+}

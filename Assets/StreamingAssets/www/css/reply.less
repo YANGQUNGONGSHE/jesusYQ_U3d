@@ -1,0 +1,128 @@
+body{
+    background: #f0f0f0;
+    font-family: NotoSansCJKsc-Regular;
+}
+section{
+    font-size: .24rem;
+    .roomOwn{
+        background: #fff;
+        overflow: hidden;
+        border-radius: .1rem;
+        padding: .4rem .2rem .2rem;
+        margin: .1rem .2rem .2rem;
+        display: flex;
+        justify-content: flex-start;
+        .avatar{
+            img{
+                width: .8rem;
+                height: .8rem;
+            }
+        }
+        .userSign{
+            margin-left: .2rem;
+            flex: 1;
+            padding-bottom: .2rem;
+            border-bottom: .01rem solid #dcdcdc;
+            .userComment{
+                display: flex;
+                justify-content: space-between;
+                .userName{
+                    h2{
+                        font-size: .3rem;
+                        color: #191919;
+                        margin-bottom: .08rem;
+                    }
+                    span{
+                        color: #b4b4b4;
+                        font-size: .24rem;
+                    }
+                }
+                .userAgreeNums.active{
+                    color: #ff6e6b;
+
+                }
+                .userAgreeNums{
+                    color: #b4b4b4;
+                    font-size: .24rem;
+                    img{
+                        width: 0.29rem;
+                        height: 0.28rem;
+                    }
+                }
+                
+            }
+            p{
+                font-size: .28rem;
+                color: #191919;
+                padding: .2rem 0 0 0;
+            }
+        }
+    }
+    // 回复
+    .reply{
+        background: #fff;
+        overflow: hidden;
+        border-radius: .1rem;
+        margin: 0 .2rem;
+        padding-top: .2rem;
+        //赞
+        //评论
+        .comment{
+            li{
+                padding: .2rem;
+                display: flex;
+                justify-content: flex-start;
+                // align-items: center;
+                .avatar{
+                    img{
+                        width: .8rem;
+                        height: .8rem;
+                    }
+                }
+                .userSign{
+                    margin-left: .2rem;
+                    flex: 1;
+                    padding-bottom: .2rem;
+                    border-bottom: .01rem solid #dcdcdc;
+                    .userComment{
+                        display: flex;
+                        justify-content: space-between;
+                        .userName{
+                            h2{
+                                font-size: .3rem;
+                                color: #191919;
+                                margin-bottom: .08rem;
+                            }
+                            span{
+                                color: #b4b4b4;
+                                font-size: .24rem;
+                            }
+                        }
+                        .userAgreeNums.active{
+                            color: #ff6e6b;
+
+                        }
+                        .userAgreeNums{
+                            color: #b4b4b4;
+                            font-size: .24rem;
+                            img{
+                                width: 0.29rem;
+                                height: 0.28rem;
+                            }
+                        }
+                        
+                    }
+                    p{
+                        font-size: .28rem;
+                        color: #191919;
+                        padding: .2rem 0 0 0;
+                        a{
+                            color: #64a0dc;
+                        }
+                    }
+                }
+            }
+        }
+    }        
+        
+}

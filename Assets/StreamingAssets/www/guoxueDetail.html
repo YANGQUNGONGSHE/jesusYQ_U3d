@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>卷章</title>
+    <link rel="stylesheet" href="./lib/css/base.css">
+    <link rel="stylesheet" href="./css/guoxueDetail.css">
+    <style>
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <!--<script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>-->
+</head>
+<body>
+    <section id="app" v-cloak>
+        <!-- <button @click="srcoll">点击</button> -->
+        <div class="search-cont">
+            <img src="./images/search.png" alt="">
+            <input type="text" placeholder="搜索经文关键字" v-model="val" @keyup.enter="fetchParagraphList">
+        </div>
+        <div class="remake" @click="goOnRead">
+            <span>上次阅读到</span><br>
+            <span>"{{lastRead}}"</span><br>
+            <span class="goon">点击继续阅读</span>
+        </div>
+        <div class="catalog">
+            <div class="cata">
+                <ul class="content">
+                    <li :class="{ac : isShowAc}" @click="clickVolume">卷</li>
+                    <li :class="{ac : !isShowAc}">章</li>
+                    <!-- @click="clickChapter" -->
+                </ul>
+            </div>
+            <div class="change" v-show="isShowAc" v-if="bookId=='bible'">
+                <div :class="{active : isShowSelect}" @click="goOld">
+                    <img v-if="isShowSelect" src="./images/unselect.jpg" alt="">
+                    <img v-else src="./images/select.png" alt="" class="second">
+                    <span>旧</span><br><span>约</span>
+                </div>
+                <div :class="{active : !isShowSelect}" @click="goNew">
+                    <img v-if="!isShowSelect" src="./images/unselect.jpg" alt="">
+                    <img v-else src="./images/select.png" alt="" class="second">
+                    <span>新</span><br><span>约</span>
+                </div>
+            </div>
+            <div class="content-detail">
+                <ul v-if="isShowAc" class="xuyang">
+                    <li :class="{active:volumeIdx == index}" v-for="(volume,index) in volumeList" @click="goChapter(index, volume.Title)">{{volume.Title}}</li>
+                    <!-- <li>梁惠王章句下</li>
+                    <li>公孙丑句上</li>
+                    <li>公孙丑句上</li>
+                    <li>梁惠王章句下</li>
+                    <li>公孙丑句上</li>
+                    <li>公孙丑句上</li>
+                    <li>梁惠王章句下</li>
+                    <li>公孙丑句上</li>
+                    <li>公孙丑句上</li>
+                    <li>梁惠王章句下</li>
+                    <li>公孙丑句上</li>
+                    <li>公孙丑句上</li> -->
+                </ul>
+                <ul v-else>
+                    <li :class="{active:chapterIdx == index}" v-for="(chapter,index) in chapterList" @click="goParagraph(index)">{{chapter.Title}}</li>
+                    <!-- <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li> -->
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="./lib/js/fontsize.js"></script>
+    <script src="./lib/js/common.js"></script>
+    <script src="./lib/js/zepto.min.js"></script>
+    <script src="./lib/js/vue.min.js"></script>
+    <script src="./lib/js/vue-resource.min.js"></script>
+    <!--<script src="./js/guoxueDetail.js"></script>-->
+    <script>
+        //zepto添加scrollTop功能
+        $.fn.scrollTo = function (options) {
+            var defaults = {
+                toT: 0,    //滚动目标位置
+                durTime: 500,  //过渡动画时间
+                delay: 30,     //定时器时间
+                callback: null   //回调函数
+            };
+            var opts = $.extend(defaults, options),
+                timer = null,
+                _this = this,
+                curTop = _this.scrollTop(),//滚动条当前的位置
+                subTop = opts.toT - curTop,    //滚动条目标位置和当前位置的差值
+                index = 0,
+                dur = Math.round(opts.durTime / opts.delay),
+                smoothScroll = function (t) {
+                    index++;
+                    var per = Math.round(subTop / dur);
+                    if (index >= dur) {
+                        _this.scrollTop(t);
+                        window.clearInterval(timer);
+                        if (opts.callback && typeof opts.callback == 'function') {
+                            opts.callback();
+                        }
+                        return;
+                    } else {
+                        _this.scrollTop(curTop + index * per);
+                    }
+                };
+            timer = window.setInterval(function () {
+                smoothScroll(opts.toT);
+            }, opts.delay);
+            return _this;
+        };
+    </script>
+
+    <script>
+
+        var volumeNumber = parseInt(request['VolumeNumber']);
+        // var volumeLength = parseInt(request['VolumeLength']);
+        var chapterNumber = parseInt(request['ChapterNumber']);
+        var chapterLength = parseInt(request['ChapterLength']);
+        volumeNumber = volumeNumber ? volumeNumber : 1;
+        chapterNumber = chapterNumber ? chapterNumber : 1;
+        chapterLength = chapterLength ? chapterLength : 1;
+        // console.info(volumeNumber);
+        var app = {};
+        function getAppData(ssid, bookId) {
+            app = new Vue({
+                el: '#app',
+                data: {
+                    isShowAc: true,
+                    // isShowSelect: true,
+                    bookId: bookId,
+                    volumeList: [],
+                    volumeIdx: volumeNumber ? volumeNumber - 1 : 0, //下标
+                    volumeNum: volumeNumber ? volumeNumber : 1, //下标+1
+                    chapterList: [],
+                    chapterIdx: chapterNumber ? chapterNumber - 1 : 0,
+                    chapterNum: chapterNumber ? chapterNumber : 1,
+                    isShowSelect: true, //新约旧约
+                    val: '',
+                    lastRead: '', //上次读到
+                    lastReadVolumeTitle: '',
+                    lastReadChapterTitle: '',
+                    ssid: ssid,
+                },
+                mounted: function () {
+                    //setTimeout(() => {
+                    //console.info(this.volumeNum);
+                    //console.info(this.volumeIdx)
+                    // alert('22')
+                    this.fetchVolume();
+                    //}, 250);
+                },
+                filters: {
+
+                },
+                methods: {
+                    fetchVolume: function () { // 卷
+                        this.$http.get('http://apiv2.yangqungongshe.com/books/{BookId}/volumes/query', {
+                            params: {
+                                "BookId": this.bookId,
+                            }
+                        }).then(function (res) {
+                            console.info(res);
+                            this.volumeList = res.body.Volumes;
+                            this.fetchChapter(this.volumeNum); // 初始化章
+                            this.srcoll(this.volumeIdx);
+                            this.getLastRead();// 上次阅读查询
+                        })
+                    },
+                    goChapter: function (index, title) { // 点击卷至章
+                        this.chapterIdx = 0; // 卷变化时，章下标重新初始化
+                        this.isShowAc = false;
+                        this.volumeIdx = index; // active
+                        this.volumeNum = index + 1;
+                        if (index < 39) {
+                            this.isShowSelect = true;
+                        } else {
+                            this.isShowSelect = false;
+                        }
+                        this.fetchChapter(this.volumeNum);
+                        this.srcoll(this.chapterIdx);
+                        window.location.href = 'uniwebview://selectedVolume?msg=' + title;
+                    },
+                    fetchChapter: function (volumeNum) { // 查询章（根据下标查询）
+                        this.$http.get("http://apiv2.yangqungongshe.com/books/{BookId}/volumes/{VolumeNumber}/chapters/query", {
+                            params: {
+                                "BookId": this.bookId,
+                                "VolumeNumber": volumeNum
+                            }
+                        }).then(function (res) {
+                            console.info(res);
+                            this.chapterList = res.body.Chapters;
+                            // this.lastRead = this.chapterList[chapterNumber - 1].Title; //上次读到
+                        })
+                    },
+                    //旧约
+                    goOld: function () {
+                        this.isShowSelect = true;
+                        this.srcoll(0);
+                    },
+                    //新约
+                    goNew: function () {
+                        this.isShowSelect = false;
+                        this.srcoll(39);
+                    },
+                    srcoll: function (idx) { //滚动
+                        // $(".content-detail").scrollTop(80)
+                        $(".content-detail").scrollTo({ toT: idx * 50.5 }); //zepto插件
+                    },
+                    clickVolume: function () {
+                        this.isShowAc = true;
+                        this.srcoll(this.volumeNum);
+                    },
+                    // clickChapter: function () { //点击章
+                    //     this.isShowAc = false;
+                    //     this.srcoll(this.chapterIdx);
+                    // },
+                    getLastRead: function () {
+                        console.info(this.bookId);
+                        this.$http.get('http://apiv2.yangqungongshe.com/chapterreads/last', {
+                            params: {
+                                "bookid": this.bookId,
+                            },
+                            headers: {
+                                "X-ss-opt": "perm",
+                                "X-ss-pid": this.ssid,
+                            }
+                        }).then(function (res) {
+                            console.info('rreess=>', res);
+                            var resData = res.body.ChapterRead;
+                            this.lastReadVolumeTitle = resData.Volume.Title;
+                            this.lastReadChapterTitle = resData.Chapter.Title;
+                            this.lastRead = resData.Volume.Title + resData.Chapter.Title;
+                            window.location.href = 'uniwebview://selectedLastRead?msg=' + this.lastReadVolumeTitle;
+                        })
+                    },
+                    goOnRead: function () { //点击继续阅读
+                        // window.location.href = 'uniwebview://selectedLastRead?msg='+this.lastReadVolumeTitle;
+                        console.info(volumeNumber, chapterNumber);
+                        if (this.lastRead) {
+                            window.location.href = "texts.html?BookId=" + this.bookId + "&VolumeNumber=" + volumeNumber + "&VolumeLength=" + this.volumeList.length + "&ChapterNumber=" + chapterNumber + "&ChapterLength=" + chapterLength;
+                            // setTimeout(()=>{
+                            //     window.location.href = "texts.html?BookId=" + this.bookId + "&VolumeNumber=" + volumeNumber + "&VolumeLength=" + this.volumeList.length + "&ChapterNumber=" + chapterNumber + "&ChapterLength=" + chapterLength;
+                            // }, 100)
+                            console.log(123, this.lastReadVolumeTitle);
+                        } else {
+                            return;
+                        }
+
+                        //上次阅读时，书id不变，卷长度不变。
+                        // window.location.href = "texts.html?BookId=" + this.bookId + "&VolumeNumber=" + volumeNumber + "&VolumeLength=" + this.volumeList.length + "&ChapterNumber=" + chapterNumber + "&ChapterLength=" + chapterLength;
+
+                    },
+                    fetchParagraphList: function () { //关键字查询及跳转
+                        console.info(this.val);
+                        var obj = {};
+                        obj.BookId = this.bookId;
+                        obj.Contentfilter = this.val;
+
+                        if (window.localStorage) {
+                            window.localStorage.setItem("item", JSON.stringify(obj));
+                            window.location.href = "textsFilter.html";
+                        } else {
+                            alter("请使用高级浏览器！")
+                        }
+                    },
+                    goParagraph: function (index) { // 跳转到节
+                        this.chapterIdx = index; // active
+                        this.chapterNum = index + 1;
+                        window.location.href = "texts.html?BookId=" + this.bookId + "&VolumeNumber=" + this.volumeNum + "&VolumeLength=" + this.volumeList.length + "&ChapterNumber=" + this.chapterNum + "&ChapterLength=" + this.chapterList.length;
+                        // window.location.href = "texts.html?BookId=" + this.bookId + "&VolumeNumber=" + this.volumeNum + "&ChapterNumber=" + this.chapterNum;
+                    }
+                },
+            })
+        }
+
+        function getUnityData(ssid, bookId) {
+            // alert('11')
+            //app.ssid = ssid;
+            //app.bookId = bookId;
+            getAppData(ssid, bookId);
+        }
+
+    </script>
+</body>
+</html>

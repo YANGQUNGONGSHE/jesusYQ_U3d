@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图文编辑</title>
+    <link rel="stylesheet" href="./css/videoTextEleditor.css">
+    <!-- <script src="../jquery.min.js"></script> -->
+    <style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body {
+		    -webkit-touch-callout: none;
+		    background-color: #fff;
+		    line-height: inherit;
+		    /* padding-top: 30px; */
+		}
+		#contentEditor{
+			width: 100%;
+			min-height: 300px;
+			box-sizing: border-box;
+			padding: 10px;
+    		color: #444;
+		}
+		#contentEditor p{
+		    letter-spacing: 0.25px;
+		    font: 16px/25px Tahoma, Verdana, 宋体;
+		    margin: 20px 0px;
+		}
+		#contentEditor h4 {
+		    font-weight: bold;
+		    line-height: 1.333em;
+		    margin: 10px 0 20px;
+		    padding: 25px 0 0;
+		}
+		#contentEditor img{
+			width: 100%;
+			height: auto;
+			box-sizing: border-box;
+		}
+		.dempTip{
+		    border-left: 2px solid #00BCD4;
+		    padding-left: 5px;
+		    margin: 10px;
+		    font-size: 16px;
+		}
+		/* code{
+			white-space: pre-wrap;
+		    background: #2D2D2D;
+		    display: block;
+		    margin: 10px;
+		    border-radius: 5px;
+		    color: #fff;
+		}
+		.viewTit{
+		    color: #FF5722;
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    height: 30px;
+		    line-height: 30px;
+		    font-size: 14px;
+		    text-align: center;
+		    display: block;
+		    width: 100%;
+		    background: #FFEB3B;
+		    box-shadow: 0 0 5px;
+		} */
+		.Eleditor-placeholder{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+    <div id="contentEditor"></div>
+    <div class="videoSrc">
+        <input type="text" placeholder="输入视频通用地址" id="videoSrc">
+    </div>
+    <div class="title">
+        <input type="text" placeholder="标题" id="titleTxt">
+    </div>
+    <div class="content">
+        <textarea name="" cols="30" rows="14" placeholder="正文" id="contTxt" ></textarea>
+    </div>
+	<!-- 发布 -->
+    <!--<button onClick="getEditorHtml()">发布</button>-->
+    
+
+	<script src="./lib/js/fontsize.js"></script>
+	<script src="./lib/js/jquery.min.js"></script>
+	<script src="./lib/js/layer.js"></script>
+    <script src="./lib/js/webuploader.min.js"></script>
+    <script src="./lib/js/Eleditor.js"></script>
+    <!-- <script src="../js/eleditor.js"></script> -->
+	<script src="./js/videoTextEleditor.js"></script>
+</body>
+</html>

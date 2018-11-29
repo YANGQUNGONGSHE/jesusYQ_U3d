@@ -1,0 +1,1 @@
+{"buildSettings":{"OTHER_LDFLAGS":["-lz", "-lstdc++", "-ObjC", "-licucore", "-lsqlite3"]}, "ShareSDKPlatforms":{"22":"wx35bbc4522fb5a78a", "1":"568898243", "24":"100371282", "23":"wx35bbc4522fb5a78a", "37":"wx35bbc4522fb5a78a", "6":"100371282"}, "folders":["/SDK/Required", "/SDK/ShareSDK", "/SDK/ShareSDK/Support/Optional", "/SDK/ShareSDK/Support/Required"]}

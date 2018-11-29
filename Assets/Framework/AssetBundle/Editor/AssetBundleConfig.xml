@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsFolder:是否整个文件夹一起打包 IsFirstData:是否第一次初始化就加载该数据-->
+<Root>
+	<AssetBundle>
+		<Item Name="PanelUI预设" Tag="UI" IsFolder="True" IsFirstData="True">
+			<Path Value="Download/UI/View" />
+		</Item>
+		<!--<Item Name="PanelUI预设" Tag="UI" IsFolder="True" IsFirstData="True">
+			<Path Value="Download/UI/Item" />
+		</Item>-->
+		<Item Name="UI资源" Tag="UI" IsFolder="True" IsFirstData="True">
+			<Path Value="Download/Art/Icon" />
+		</Item>
+		<Item Name="Font字体" Tag="UI" IsFolder="True" IsFirstData="True">
+			<Path Value="Download/Art/Font" />
+		</Item>
+		<!--<Item Name="UI资源" Tag="UI" IsFolder="True" IsFirstData="True">
+			<Path Value="Download/Art/Atlas" />
+		</Item>-->
+		<!--    <Item Name="场景UI预设" Tag ="UI" IsFolder="True" IsFirstData="True">
+      <Path Value="Download/Prefabs/UI/Scene" />
+    </Item>
+
+     <Item Name="其他UI预设" Tag ="UI" IsFolder="True" IsFirstData="True">
+      <Path Value="Download/Prefabs/UI/Other" />
+    </Item>
+
+     <Item Name="字体Font" Tag = "UI" IsFolder = "True" IsFirstData = "True">
+    	<Path Value="Download/Art/Font" />
+    </Item>-->
+		<!--
+    <Item Name="玩家预设" Tag ="Role" IsFolder="True" IsFirstData="False">
+      <Path Value="Download/Prefabs/RolePrefabs/Player" />
+    </Item>
+
+    <Item Name="NPC预设" Tag ="Role" IsFolder="True" IsFirstData="False">
+      <Path Value="Download/Prefabs/RolePrefabs/NPC" />
+    </Item>
+
+    <Item Name="怪物预设" Tag ="Role" IsFolder="True" IsFirstData="False">
+      <Path Value="Download/Prefabs/RolePrefabs/Monster" />
+    </Item>-->
+		<!--    <Item Name="通用特效" Tag ="Effect" IsFolder="True" IsFirstData="True">
+      <Path Value="Download/Prefabs/Effect/Common" />
+    </Item>
+
+    <Item Name="技能特效" Tag ="Effect" IsFolder="False" IsFirstData="False">
+      <Path Value="Download/Prefabs/Effect/Role" />
+    </Item>-->
+		<!--    <Item Name="初始化场景" Tag ="Scene" IsFolder="False" IsFirstData="True">
+     <Path Value="Download/Scenes/xxxxxx.unity" />
+    </Item>-->
+		<!--     <Item Name="其他场景" Tag ="Scene" IsFolder="False" IsFirstData="False">-->
+		<!--      <Path Value="Download/Scenes/GameScene_HuPaoCun.unity" />-->
+		<!--      <Path Value="Download/Scenes/xxxxxx.assetbundle" />-->
+		<!--      <Path Value="Download/Scenes/xxxxxx.assetbundle" />-->
+		<!--      <Path Value="Download/Scenes/xxxxxx.assetbundle" />-->
+		<!--    </Item>-->
+	</AssetBundle>
+</Root>

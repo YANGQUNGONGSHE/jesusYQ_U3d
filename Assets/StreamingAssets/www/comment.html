@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>评论</title>
+    <link rel="stylesheet" href="./lib/css/base.css">
+    <link rel="stylesheet" href="./css/comment.css">
+    <style lang="">
+        body{
+            position: relative;
+        }
+        .loading{
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            top: 50%;
+            margin-top: -40px;
+            margin-left: -40px;
+            background: rgba(0, 0, 0, .5);
+            border-radius: 4px;
+            z-index: 1000;
+        }
+        .loading img{
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -20px;
+            -webkit-animation:rotateImg 4s linear infinite;
+        }
+        .loading span {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+        }
+        @keyframes rotateImg {
+            0% {transform : rotate(0deg);}
+            100% {transform : rotate(360deg);}
+        }
+        @-webkit-keyframes rotateImg {
+            0%{-webkit-transform : rotate(0deg);}
+            100%{-webkit-transform : rotate(360deg);}
+        }
+        .isshow{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <section id="comment">
+       <textarea name="" class="comment" placeholder="评论..." autofocus="autofocus"></textarea>
+    </section>
+    <div class="loading isshow" id="showLoading">
+        <img src="./images/loading.png" alt="">
+        <span>加载中...</span>
+    </div>
+    <!-- <button onclick="submit()">提交</button> -->
+    <script src="./lib/js/fontsize.js"></script>
+    <script src="./lib/js/zepto.js"></script>
+    <!-- <script src="../lib/js/vue.js"></script> -->
+    <!-- <script src="../lib/js/vue-resource.js"></script> -->
+    <script src="./js/comment.js"></script>
+    <script type="text/javascript">
+        autodivheight();
+        function autodivheight(){ //函数：获取尺寸
+            //获取浏览器窗口高度
+            var winHeight=0;
+            if (window.innerHeight)
+                winHeight = window.innerHeight;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight;
+            //通过深入Document内部对body进行检测，获取浏览器窗口高度
+            if (document.documentElement && document.documentElement.clientHeight)
+                winHeight = document.documentElement.clientHeight;
+            //DIV高度为浏览器窗口的高度
+            //document.getElementById("test").style.height= winHeight +"px";
+            //DIV高度为浏览器窗口高度的一半
+            document.getElementById("comment").style.height= winHeight +"px";
+        }
+        window.onresize=autodivheight; //浏览器窗口发生变化时同时变化DIV高度
+        // $('.comment').focus();
+        setTimeout(function () {
+            console.info('键盘弹起啊')
+            $('.comment').trigger("click").focus()
+        }, 500)
+        </script>
+</body>
+</html>

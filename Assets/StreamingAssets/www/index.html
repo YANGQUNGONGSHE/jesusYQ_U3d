@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>论道正文</title>
+    <link rel="stylesheet" href="./lib/css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+
+        #app {
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            /* overflow: hidden; */
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /*16:9 56.25%   16:12 75%*/
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+        }
+
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+    </style>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <!--<script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>-->
+</head>
+<body>
+
+    <section id="app" v-cloak>
+        <ul class="titles">
+            <li>
+                <div class="content" id="xuyang">
+                    <div class="userInfo">
+                        <div class="avatar">
+                            <img :src="authorInfo.AvatarUrl" alt="" v-if="authorInfo.AvatarUrl">
+                            <img src="./images/user_profile.png" alt="" v-else>
+                        </div>
+                        <div class="userSign">
+                            <h4>{{authorInfo.DisplayName}}</h4>
+                            <span>个人简介</span>
+                        </div>
+                    </div>
+                    <!--  <div class="titleImg">
+                          <img :src="postData.PictureUrl" alt="">
+                    </div> -->
+                    <h3>{{postData.Title}}</h3>
+
+                    <!-- 视频 -->
+                    <div class="video-container" v-if="postData.ContentUrl" v-html="postData.ContentUrl">
+                        <!-- <iframe width="640" height="498" :src="postData.ContentUrl"></iframe> -->
+                    </div>
+                    <!-- 正文内容 -->
+                    <p v-html="postData.Content" class="textImg"></p>
+                    <!-- <div class="textImg">
+        <img :src="postData.PictureUrl" alt="">
+    </div> -->
+                    <div class="fr author">
+                        <span>编辑于 {{ postData.PublishedDate | publishedDate}}</span><br>
+                        <span>著作权归作者所有</span>
+                    </div>
+                </div>
+                <!-- 点赞、评论 -->
+                <div class="interaction">
+                    <ul>
+                        <li :class="{ active : !isActive  }" @click="isActive=!isActive">赞 {{postData.LikesCount}}</li>
+                        <li :class="{ active : isActive }" @click="isActive=!isActive">评论 {{postData.CommentsCount}}</li>
+                    </ul>
+                    <span>阅读次数 {{postData.ViewsCount}}</span>
+                </div>
+                <!-- 赞和评论(回复) -->
+                <div class="reply">
+                    <!-- 赞 -->
+                    <ul class="agree" v-if="!isActive">
+                        <li v-for="like in likesList">
+                            <div class="avatar">
+                                <img :src="like.User.AvatarUrl" alt="" v-if="like.User.AvatarUrl">
+                                <img src="./images/user_profile.png" alt="" v-else>
+                            </div>
+                            <div class="userSign">
+                                <h2>{{like.User.DisplayName}}</h2>
+                                <span>个人简介</span>
+                            </div>
+                        </li>
+                        <li class="nodata" v-show="likesList.length==0">暂无赞，赶快来赞一个吧~</li>
+                    </ul>
+                    <!-- 评论 -->
+                    <ul class="comment" v-else>
+                        <li v-for="comments in commentsList" @click="publishReply(comments.Id,comments.User.DisplayName)">
+                            <div class="avatar">
+                                <img :src="comments.User.AvatarUrl" alt="" v-if="comments.User.AvatarUrl">
+                                <img src="./images/user_profile.png" alt="" v-else>
+                            </div>
+                            <div class="userSign">
+                                <div class="userComment">
+                                    <div class="userName">
+                                        <h2>{{comments.User.DisplayName}}</h2>
+                                        <span>{{comments.CreatedDate | commentDate}}</span>
+                                    </div>
+                                    <div class="userAgreeNums" :class="{active : comments.YesVoted}" @click.stop="clickLike(comments.Id, comments.YesVoted)">
+                                        <span>{{comments.VotesCount}}</span>
+                                        <img src="./images/agree.png" alt="" v-if="comments.YesVoted">
+                                        <img src="./images/disagree.png" alt="" v-else>
+                                    </div>
+                                </div>
+                                <p>{{comments.Content}}</p>
+                                <a href="javascript:;" @click.stop="goReply(comments.Id, comments.ParentId)" v-if="comments.RepliesCount > 0">共{{comments.RepliesCount}}条回复 &gt;</a>
+                            </div>
+                        </li>
+                        <li class="nodata" v-show="commentsList.length==0">暂无评论，赶快来评论一个吧~</li>
+                    </ul>
+                </div>
+            </li>
+            <!-- <li>123</li> -->
+        </ul>
+    </section>
+    <script src="./lib/js/fontsize.js"></script>
+    <script src="./lib/js/common.js"></script>
+    <script src="./lib/js/zepto.min.js"></script>
+    <script src="./lib/js/vue.min.js"></script>
+    <script src="./lib/js/vue-resource.min.js"></script>
+    <script>
+        window.onload = function () {
+            //为设置滚动条问题
+            var app = document.getElementById("app");
+            var clientHeight = document.documentElement.clientHeight;
+
+            app.style.height = clientHeight + "px";
+            //console.info(app.offsetHeight);
+
+            // setTimeout(function () {
+            //     var xuyang = document.getElementById("xuyang");
+            //     var scrollH = xuyang.offsetHeight;
+            //     console.info('xuyang=>', xuyang.offsetHeight)
+            //     console.info('xuyang=>', xuyang.clientHeight)
+            //     $("#app").scrollTo( {toT : scrollH} );
+            // },  100)
+        }
+    </script>
+    <script>
+        //zepto添加scrollTop功能
+        $.fn.scrollTo = function (options) {
+            var defaults = {
+                toT: 0,    //滚动目标位置
+                durTime: 0,  //过渡动画时间
+                delay: 30,     //定时器时间
+                callback: null   //回调函数
+            };
+            var opts = $.extend(defaults, options),
+                timer = null,
+                _this = this,
+                curTop = _this.scrollTop(),//滚动条当前的位置
+                subTop = opts.toT - curTop,    //滚动条目标位置和当前位置的差值
+                index = 0,
+                dur = Math.round(opts.durTime / opts.delay),
+                smoothScroll = function (t) {
+                    index++;
+                    var per = Math.round(subTop / dur);
+                    if (index >= dur) {
+                        _this.scrollTop(t);
+                        window.clearInterval(timer);
+                        if (opts.callback && typeof opts.callback == 'function') {
+                            opts.callback();
+                        }
+                        return;
+                    } else {
+                        _this.scrollTop(curTop + index * per);
+                    }
+                };
+            timer = window.setInterval(function () {
+                smoothScroll(opts.toT);
+            }, opts.delay);
+            return _this;
+        };
+    </script>
+    <script>
+        Vue.http.headers.common['Content-Type'] = 'application/json';
+        Vue.http.headers.common['Accept'] = 'application/json';
+        var basePostUrl = 'http://apiv2.yangqungongshe.com/posts/';
+        var app = {};
+        function getAppData(ssid, postId) {
+
+            app = new Vue({
+                el: '#app',
+                data: {
+                    ssid: ssid,
+                    postId: postId,
+                    isActive: false,
+                    postData: [], //帖子
+                    authorInfo: {}, //帖子作者
+                    likesList: [], //帖子点赞列表
+                    commentsList: [], //帖子评论列表
+                },
+                mounted: function () {
+                    this.fetchPost(); //查询帖子
+                    this.fetchLikes(); //查询点赞
+                    this.fetchComments(); //查询评论
+                },
+                watch: {
+                    isActive: function () {
+                        this.scroll();
+                    }
+                },
+                filters: {
+                    publishedDate: function (date) { // 帖子发布时间
+                        console.info('date=>', date);
+                        var timestamp = date;
+                        var newDate = new Date();
+                        newDate.setTime(timestamp * 1000);
+                        var getLastDate = newDate.format('yyyy-MM-dd hh:mm:ss');
+                        // console.info(getLastDate);
+                        console.info(getLastDate.substring(0, 10));
+                        return getLastDate.substring(0, 10)
+                    },
+                    commentDate: function (date) {
+                        var timestamp = date;
+                        var newDate = new Date();
+                        newDate.setTime(timestamp * 1000);
+                        var getLastDate = newDate.format('yyyy-MM-dd hh:mm:ss');
+                        return getLastDate.substring(5, 10)
+                    }
+                },
+                methods: {
+                    fetchPost: function () {
+                        var url = basePostUrl + this.postId;
+                        this.$http.get(url, {
+                        }).then(function (res) {
+                            console.info(res);
+                            this.postData = res.body.Post;
+                            this.postData.PictureUrl = this.postData.PictureUrl;
+                            this.authorInfo = this.postData.Author;
+                            console.info(this.postData);
+                            console.info(this.authorInfo);
+                        })
+                    },
+                    fetchLikes: function () {
+                        this.$http.get('http://apiv2.yangqungongshe.com/likes/query/byparent', {
+                            params: {
+                                "parentid": this.postId,
+                                "descending": true
+                            }
+                        }).then(function (res) {
+                            console.info('fetchLikes=>', res);
+                            this.likesList = res.body.Likes;
+                        })
+                    },
+                    fetchComments: function () {
+                        this.$http.get('http://apiv2.yangqungongshe.com/comments/query/byparent', {
+                            params: {
+                                "parentid": this.postId,
+                                "descending": true
+                            },
+                            headers: {
+                                "X-ss-opt": "perm",
+                                "X-ss-pid": this.ssid
+                            }
+                        }
+                        ).then(function (res) {
+                            console.info('fetchComments=>', res);
+                            this.commentsList = res.body.Comments;
+                        })
+                    },
+                    clickLike: function (id, yesVoted) { // 评论里的点赞
+                        console.info(id);
+                        console.info(yesVoted);
+                        var self = this;
+                        if (!yesVoted) {
+                            this.$http.post( // 增加
+                                "http://apiv2.yangqungongshe.com/votes",
+                                { "ParentType": "评论", "ParentId": id, "Value": !yesVoted },
+                                {
+                                    emulateJSON: true,
+                                    headers: {
+                                        "X-ss-opt": "perm",
+                                        "X-ss-pid": this.ssid
+                                    }
+                                }
+                            ).then(function (res) {
+                                console.info('clickLike=>', res);
+                                this.fetchComments()
+                            }, function (res) {
+                                console.info(res);
+                            })
+                        } else {
+                            this.$http.delete( // 删除
+                                "http://apiv2.yangqungongshe.com/votes", {
+                                    params: {
+                                        "ParentType": "评论",
+                                        "ParentId": id
+                                    },
+                                    headers: {
+                                        "X-ss-opt": "perm",
+                                        "X-ss-pid": this.ssid
+                                    }
+                                }
+                            ).then(function (res) {
+                                this.fetchComments();
+                            }, function (res) {
+                                console.info(res);
+                            })
+                        }
+                    },
+                    //查看回复
+                    goReply: function (commentsId, postId) {
+                        console.info(commentsId);
+                        window.location.href = 'uniwebview://preach_changePage?pageEnum=1';
+                        window.location.href = 'reply.html?commentsId=' + commentsId + '&postId=' + postId;
+                    },
+                    //进行回复
+                    publishReply: function (commentId, commentName) {
+                        window.location.href = 'uniwebview://preach_changePage?pageEnum=1&commentId=' + commentId + '&commentName=' + commentName;
+                    },
+                    //滚动元素
+                    scroll: function () {
+                        var xuyang = document.getElementById("xuyang");
+                        var scrollH = xuyang.offsetHeight;
+                        console.info('？？？？？？？？？？？？？？？scrollH=>', scrollH);
+                        $("#app").scrollTo({ toT: scrollH });
+                    }
+                },
+            })
+        }
+        function getUnityData(ssid, postId) {
+            console.log("收到PostId:", postId);
+            console.log("收到Ssid:", ssid);
+            getAppData(ssid, postId);
+            window.location.href = 'uniwebview://preach_debug_getUnityData?ssid=' + ssid + '&postId=' + postId;
+        }
+        function scrollToComment() {
+            app.isActive = true;
+            app.scroll();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 059e3eea591289b4c99a64218718c29e
+timeCreated: 1504702662
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Noto Sans CJK JP
+  fontNames:
+  - Noto Sans CJK JP
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: download/art/font/notosanscjkjp-medium
+  assetBundleVariant: assetbundle

@@ -1,0 +1,314 @@
+body {
+  background-color: #f0f0f0;
+  font-size: .22rem;
+  font-family: NotoSansCJKsc-Regular;
+  margin-bottom: 1rem;
+}
+body ::-webkit-scrollbar {
+  display: none;
+  /*隐藏滚轮*/
+}
+#app ul li {
+  margin-bottom: .04rem;
+}
+#app ul li .text-cont {
+  background-color: #fff;
+  display: flex;
+}
+#app ul li .text-cont .start {
+  width: .54rem;
+  border-right: .02rem solid #b4b4b4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app ul li .text-cont .start img {
+  width: .22rem;
+}
+#app ul li .text-cont .texts {
+  flex: 1;
+  color: #191919;
+  font-size: .32rem;
+  padding: .2rem 0 .2rem .16rem;
+  line-height: 0.6rem;
+}
+#app ul li .text-cont .texts p.active {
+  color: #ff6e6b;
+}
+#app ul li .text-cont .texts p img {
+  vertical-align: middle;
+  width: .36rem;
+  height: .36rem;
+}
+#app ul li .text-cont .texts p .clickImg {
+  display: inline-block;
+  height: .36rem;
+  width: .36rem;
+}
+#app ul li .text-cont .texts p .clickImg.aaa {
+  background: url(../images/remake.png) center center no-repeat;
+  background-size: 100% 100%;
+}
+#app ul li .text-cont .texts p .clickImg.bbb {
+  background: url(../images/remaked.png) center center no-repeat;
+  background-size: 100% 100%;
+}
+#app ul li .text-cont .texts p .clickImg.ccc {
+  width: .3rem;
+  height: .18rem;
+  background: url(../images/arrow-top.png) center center no-repeat;
+  background-size: 100% 100%;
+}
+#app ul li .text-cont .texts p .noteNum {
+  color: #111;
+  font-size: .12rem;
+  padding: 0 .05rem;
+}
+#app ul li .text-cont .end {
+  width: .54rem;
+  border-left: .02rem solid #b4b4b4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app ul li .text-cont .end img {
+  width: .2rem;
+}
+#app ul li .catalog {
+  padding: 0 .2rem;
+  margin-top: .08rem;
+}
+#app ul li .catalog .cata {
+  font-size: .24rem;
+  color: #b4b4b4;
+  height: .84rem;
+  line-height: 0.84rem;
+  background-color: #fff;
+  margin-bottom: .08rem;
+}
+#app ul li .catalog .cata .content {
+  display: flex;
+}
+#app ul li .catalog .cata .content li {
+  height: .78rem;
+  text-align: center;
+  flex: 1;
+  font-size: .3rem;
+  color: #b4b4b4;
+  border-bottom: .06rem solid transparent;
+  border-radius: .02rem;
+}
+#app ul li .catalog .cata .content li.ac {
+  border-bottom: .06rem solid #ff6e6b;
+  color: #ff6e6b;
+}
+#app ul li .catalog .content-detail {
+  background-color: #fff;
+  padding: .2rem 0;
+}
+#app ul li .catalog .content-detail .note {
+  margin: 0.1rem 0;
+  font-size: .3rem;
+  line-height: .6rem;
+  color: #505050;
+}
+#app ul li .catalog .content-detail .note-taking {
+  line-height: .5rem;
+  font-size: .3rem;
+  color: #787878;
+}
+#app ul li .catalog .content-detail .note-taking .comment {
+  padding-top: .2rem;
+}
+#app ul li .catalog .content-detail .note-taking .comment li {
+  padding: .2rem;
+  border-bottom: .08rem solid #f0f0f0;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment {
+  display: flex;
+  justify-content: space-between;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userName {
+  flex: 1;
+  display: flex;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userName img {
+  width: .4rem;
+  height: .4rem;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userName h2 {
+  font-size: .24rem;
+  color: #64A0DC;
+  margin-right: .2rem;
+  margin-left: .1rem;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userName span {
+  color: #b4b4b4;
+  font-size: .2rem;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userAgreeNums.active {
+  color: #ff6e6b;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userAgreeNums {
+  color: #b4b4b4;
+  font-size: .2rem;
+  display: flex;
+  align-items: center;
+}
+#app ul li .catalog .content-detail .note-taking .comment li .userComment .userAgreeNums img {
+  width: 0.29rem;
+  height: 0.28rem;
+  margin-right: .1rem;
+}
+#app ul li .catalog .content-detail .note-taking .comment li p {
+  margin-top: .1rem;
+  font-size: .3rem;
+  color: #787878;
+}
+#app ul li .catalog .content-detail .note-taking .note-tip {
+  display: flex;
+  justify-content: flex-end;
+}
+#app ul li .catalog .content-detail .note-taking .note-tip span {
+  font-size: .24rem;
+  color: #b4b4b4;
+}
+#app ul li .catalog .content-detail .note-taking .note-tip .note-opt {
+  font-size: .2rem;
+  color: #64A0DC;
+  margin-left: .2rem;
+}
+#app ul li .catalog .content-detail .note-taking .add-notes {
+  height: .75rem;
+  line-height: 0.75rem;
+  font-size: .24rem;
+  margin: .1rem;
+  color: #b4b4b4;
+  display: flex;
+  justify-content: space-between;
+}
+#app ul li .catalog .content-detail .note-taking .add-notes .add-note {
+  flex: 1;
+  text-align: center;
+  border: .01rem solid #e4e4e4;
+}
+#app ul li .catalog .content-detail .note-taking .add-notes .add-note img {
+  vertical-align: middle;
+  width: .3rem;
+  height: 0.36rem;
+}
+#app ul li .catalog .content-detail .note-taking .add-notes .my-note {
+  border: .01rem solid #e4e4e4;
+  border-radius: .1rem;
+  padding: 0 .3rem;
+}
+#app .prev {
+  position: fixed;
+  bottom: .1rem;
+  left: 1.6rem;
+  height: .7rem;
+  border: none;
+  background: #fff;
+  outline: none;
+  z-index: 1000;
+}
+#app .prev img {
+  width: 1.24rem;
+  height: .42rem;
+}
+#app .next {
+  position: fixed;
+  bottom: .1rem;
+  right: 1.6rem;
+  height: .7rem;
+  border: none;
+  background: #fff;
+  outline: none;
+  z-index: 1000;
+}
+#app .next img {
+  width: 1.24rem;
+  height: .42rem;
+}
+#app .loadingImg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.16rem;
+  margin-left: -0.16rem;
+  z-index: 10000;
+}
+#app .range {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: .9rem;
+  width: 7.2rem;
+  background-color: #fff;
+  border-top: .01rem solid #dcdcdc;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+#app .range .contents {
+  display: flex;
+  margin-left: .3rem;
+  color: #ff6e6b;
+}
+#app .range .contents img {
+  margin-right: .1rem;
+  width: .42rem;
+  height: .3rem;
+}
+#app .range .contents .contMargin {
+  margin: 0 .1rem 0 .05rem;
+  font-size: .24rem;
+  white-space: nowrap;
+}
+#app .range .fontControl {
+  position: absolute;
+  bottom: .3rem;
+  height: 1.8rem;
+  width: 100%;
+  background: url(../images/fontsize.png) center center no-repeat;
+  background-size: 90% 50%;
+}
+#app .range .range-input {
+  flex: 1;
+}
+#app .range .fontIcon {
+  position: fixed;
+  font-size: .3rem;
+  color: #ff6e6b;
+  padding: 0 .5rem 0 0;
+  right: 0;
+  bottom: .25rem;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#app .share {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 7.2rem;
+  height: 1rem;
+  border-top: .01rem solid #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  font-size: .28rem;
+  z-index: 1000;
+}
+#app .share div {
+  flex: 1;
+  text-align: center;
+  height: 1rem;
+  line-height: 1rem;
+}

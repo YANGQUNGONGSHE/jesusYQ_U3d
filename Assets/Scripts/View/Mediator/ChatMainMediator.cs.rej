@@ -1,0 +1,9 @@
+diff a/Assets/Scripts/View/Mediator/ChatMainMediator.cs b/Assets/Scripts/View/Mediator/ChatMainMediator.cs	(rejected hunks)
+@@ -156,6 +156,7 @@
+            UserModel.UserSelectedGroupId = _mArg.SessionId;
+            iocViewManager.CloseCurrentOpenNew((int)UiId.ChatGroupSetting);
+            dispatcher.Dispatch(CmdEvent.Command.LoadGroupInfoById, _mArg.SessionId);
++         }
+ 
+     }
+ 

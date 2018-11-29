@@ -1,0 +1,14 @@
+body {
+  font-family: NotoSansCJKsc-Regular;
+}
+section {
+  display: flex;
+}
+section .comment {
+  border: 0 none;
+  padding: .3rem .3rem 0;
+  flex: 1;
+  background: #f0f0f0;
+  resize: none;
+  font-size: .3rem;
+}

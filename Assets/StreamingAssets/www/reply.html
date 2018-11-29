@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回复</title>
+    <link rel="stylesheet" href="./lib/css/base.css">
+    <link rel="stylesheet" href="./css/reply.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <section id="app" v-cloak>
+        <!-- 某人的评论 -->
+        <div class="roomOwn">
+            <div class="avatar">
+                <img :src="authorInfo.AvatarUrl" alt="">
+            </div>
+            <div class="userSign">
+                <div class="userComment">
+                    <div class="userName">
+                        <h2>{{authorInfo.DisplayName}}</h2>
+                        <span>{{parentReplyObj.CreatedDate | repliesDate}}</span>
+                    </div>
+                    <div class="userAgreeNums" :class="{active : parentReplyObj.YesVoted}" @click="clickParentLike(parentReplyObj.Id, parentReplyObj.YesVoted)">
+                        <span>{{parentReplyObj.VotesCount}}</span>
+                        <img src="./images/agree.png" alt="" v-if="parentReplyObj.YesVoted">
+                        <img src="./images/disagree.png" alt="" v-else>
+                    </div>
+                </div>
+                <p>{{parentReplyObj.Content}}</p>
+            </div>
+        </div>
+        <!-- 回复 -->
+        <div class="reply">
+            <ul class="comment">
+                <li v-for="replies in repliesList"> 
+                    <div class="avatar">
+                        <img :src="replies.User.AvatarUrl" alt="">
+                    </div>
+                    <div class="userSign">
+                        <div class="userComment">
+                            <div class="userName">
+                                <h2>{{replies.User.DisplayName}}</h2>
+                                <span>{{replies.CreatedDate | repliesDate}}</span>
+                            </div>
+                            <div class="userAgreeNums" :class="{active : replies.YesVoted}" @click="clickLike(replies.Id, replies.YesVoted)">
+                                <span>{{replies.VotesCount}}</span>
+                                <img src="./images/agree.png" alt="" v-if="replies.YesVoted">
+                                <img src="./images/disagree.png" alt="" v-else>
+                            </div>
+                        </div>
+                        <p>{{replies.Content}}</p>
+                    </div>
+                </li>
+                <!-- <li>
+                    <div class="avatar">
+                        <img src="../images/user.png" alt="">
+                    </div>
+                    <div class="userSign">
+                        <div class="userComment">
+                            <div class="userName">
+                                <h2>绵羊3号</h2>
+                                <span>09-16</span>
+                            </div>
+                            <div class="userAgreeNums">
+                                <span>43.8W</span>
+                                <img src="../images/disagree.png" alt="">
+                            </div>
+                        </div>
+                        <p>回复 <a href="javascript:;">绵羊2号</a>：羊的聪明难以想象</p>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+            
+    </section>
+
+    <script src="./lib/js/fontsize.js"></script>
+    <script src="./lib/js/common.js"></script>
+    <script src="./lib/js/zepto.js"></script>
+    <script src="./lib/js/vue.js"></script>
+    <script src="./lib/js/vue-resource.js"></script>
+    <script src="./js/reply.js"></script>
+</body>
+</html>

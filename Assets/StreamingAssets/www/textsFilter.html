@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查询相关节</title>
+    <link rel="stylesheet" href="../lib/css/base.css">
+    <!-- <link rel="stylesheet" href="../lib/css/dropload.css"> -->
+    <link rel="stylesheet" href="../css/textsFilter.css">
+    <style type="text/css">
+        .container{
+            /* position: relative;
+            min-height: 1000px; */
+            overflow: hidden;
+        }
+    </style>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <section id="app" v-cloak>
+        <div id="container" class="container">
+            <ul id="div" class="slideUl">
+                <li v-for="(item, index) in textList" @click="goChapter(item.VolumeNumber, item.ChapterNumber)">
+                    <span class="bookTip">{{ item.VolumeTitle }} {{ item.ChapterTitle }} 第{{ item.Number }}节</span>
+                    <div class="text-cont">
+                        <div class="texts">
+                            <p :class="{active : item.textColor}" @click="clickTxt(item.Content, index)">
+                                <span class="textContent">{{ item.Content }}</span> 
+                                <!-- <span class="clickImg" :class="item.initClassname" @click.stop="clickShowNoteCont(index)"></span> -->
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="slideUl" style="text-align:center;font-size:20px;color:#111;" v-show="noData">暂无相关数据！</div>
+        </div>
+    </section>
+    <script src="../lib/js/fontsize.js"></script>
+    <script src="../lib/js/common.js"></script>
+    <script src="../lib/js/zepto.js"></script>
+    <!-- <script src="../lib/js/dropload.min.js"></script> -->
+    <script src="../lib/js/layer.js"></script>
+    <script src="../lib/js/vue.js"></script>
+    <script src="../lib/js/vue-resource.js"></script>
+    <script src="../js/textsFilter.js"></script>
+</body>
+</html>

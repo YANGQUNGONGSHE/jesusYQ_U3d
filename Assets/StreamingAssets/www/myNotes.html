@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的笔记</title>
+    <link rel="stylesheet" href="./lib/css/base.css">
+    <link rel="stylesheet" href="./css/myNotes.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <section id="app" v-cloak>
+        <!-- 笔记 -->
+        <ul class="comment">
+            <li v-for="note in myNoteList">
+                <div class="userComment">
+                    <div class="userName">
+                        <img :src="note.User.AvatarUrl" alt="">
+                        <h2>{{note.User.DisplayName}}</h2>
+                        <span>{{note.CreatedDate | noteDate}}</span>
+                    </div>
+                    <div class="userAgreeNums" :class="{active : note.YesVoted}" @click="clickLike(note.Id, note.YesVoted)">
+                        <img src="./images/agree.png" alt="" v-if="note.YesVoted">
+                        <img src="./images/disagree.png" alt="" v-else>
+                        <span>{{note.VotesCount}}</span>
+                        <img src="./images/del.png" alt="" class="delImg" @click.stop="delNote(note.Id)">
+                    </div>
+                </div>
+                <p>{{note.Content}}</p>
+            </li>
+            <li v-show="myNoteList.length == 0">
+                <p style="text-align:center;">暂无数据！</p>
+            </li>
+        </ul>
+    </section>
+    <script src="./lib/js/common.js"></script>
+    <script src="./lib/js/fontsize.js"></script>
+    <script src="./lib/js/zepto.js"></script>
+    <script src="./lib/js/vue.js"></script>
+    <script src="./lib/js/vue-resource.js"></script>
+    <script src="./js/myNotes.js"></script>
+</body>
+</html>

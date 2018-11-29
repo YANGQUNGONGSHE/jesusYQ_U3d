@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: df8b5ec7a94a0cf47a50fa17b18d00af
+timeCreated: 1504153095
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Noto Sans CJK SC
+  fontNames:
+  - Noto Sans CJK SC
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: download/art/font/notosanscjksc-regular
+  assetBundleVariant: assetbundle
